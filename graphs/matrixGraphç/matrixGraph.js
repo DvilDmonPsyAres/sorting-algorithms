@@ -85,23 +85,25 @@ function searchMatrix(matrix, startNode, thingYouSearchFor) {
         // console.log(node)
 
         if(String(thingYouSearchFor) === String(node)) {
+            console.log(true)
             return path
         }
         // console.log(node)
         if(!visited.has(String(node))) {
             visited.add(String(node))
             let neighbors = getNeighbors(node, matrix);
-            console.log(neighbors)
+            // console.log(neighbors)
             for(const neighbor of neighbors) {
                 if(!visited.has(neighbor)) {
-                    console.log(neighbor)
+                    // console.log(neighbor)
                     let newPath = path.concat([neighbor]);
                     queue.push({node: neighbor, path : newPath})
                     }
                 }
             }
         }
-        console.log(visited)
+        // console.log(visited)
+        console.log(false)
         return -1;
     }
 
@@ -111,3 +113,4 @@ function searchMatrix(matrix, startNode, thingYouSearchFor) {
 
 console.log(traverseMatrix(matrix, [1,1]))
 console.log(searchMatrix(matrix, [0,0], [4,4]))
+console.log(searchMatrix(matrix, [0,0], [5,5]))
