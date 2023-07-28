@@ -120,3 +120,48 @@ console.log("Second Test:");
 console.log(degreesOfSeparation(5, 2)); // -> 1
 console.log("Third Test:");
 console.log(degreesOfSeparation(6, 1)); // -> false
+
+
+const edges = [
+  ['w','x'],
+  ['x','y'],
+  ['z','y'],
+  ['z','v'],
+  ['w','v'],
+]
+
+function createGraph(edges){
+  let graph = {};
+  for(let edge of edges) {
+    const [a, b] = edge;
+    if(!(a in graph)) graph[a] = []
+    if(!(b in graph)) graph[b] = []
+    graph[a].push(b);
+    graph[b].push(a);
+  }
+  return graph;
+}
+
+function theShortestPath(edges, nodeA, nodeB){
+  const graph = createGraph(edges);
+  let visited = new Set([nodeA]);
+  const queue = [ [nodeA, 0] ];
+
+  while(queue.length > 0) {
+    const[node, distance] = queue.shift();
+
+    if(node === nodeB){
+      return distance;
+    }
+    for(let neighbor of graph[node]) {
+      if(!visited.has(neighbor)) {
+        visited.add(neighbor)
+        queue.push([neighbor, distance + 1]);
+      }
+    }
+  }
+
+  return -1
+}
+
+console.log(theShortestPath(edges, 'y', 'w'))
