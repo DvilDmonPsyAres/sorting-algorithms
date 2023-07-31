@@ -23,3 +23,25 @@ console.log('problem2')
 n = 5, edges = [[0,1],[2,1],[3,1],[1,4],[2,4]]
 
 console.log(findSmallesSetOfVertices(n, edges));
+
+
+var findSmallestSetOfVertices = function(n, edges) {
+    // empty obj for paths to nodes
+    let reachable = {};
+    // empty arr for answer
+    let result = [];
+    //iterate over edges destination path and add to paths with a reacheble value
+    for(path of edges) {
+        // add paths to reachable
+        reachable[path[1]] = true;
+    }
+    //iterate over paths searching no reacheble values
+    for(let i = 0; i < n; i++) {
+        //if nodes is not in reachable object push to result arr;
+        if(!(i in reachable)) {
+            result.push(i)
+        }
+    }
+    //return no reachable nodes.
+    return result;
+};
